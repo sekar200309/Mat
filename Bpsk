@@ -1,0 +1,26 @@
+% BPSK Modulation
+
+% Parameters
+Fs = 1000;           % Sampling frequency
+T = 1/Fs;            % Sampling period
+fc = 50;             % Carrier frequency
+Ts = 1/fc;           % Symbol period
+num_symbols = 100;   % Number of BPSK symbols
+
+% Generate random binary data (0s and 1s)
+binary_data = randi([0, 1], 1, num_symbols);
+
+% BPSK Modulation
+t = 0:T:Ts*num_symbols-T;
+carrier = cos(2*pi*fc*t);
+
+% Modulate BPSK symbols onto the carrier
+bpsk_signal = sqrt(2/Ts) * binary_data .* carrier;
+
+% Plot BPSK signal
+figure;
+subplot(2, 1, 1);
+plot(t, bpsk_signal);
+title('BPSK Modulated Signal');
+xlabel('Time');
+ylabel('Amplitude');
